@@ -5,6 +5,8 @@ import { parseWithZod } from '@conform-to/zod';
 import { invoiceSchema, onboardingSchema } from "./utils/zodSchemas";
 import prisma from "./utils/db";
 import { redirect } from "next/navigation";
+import { emailClient } from "./utils/mailtrap";
+import { formatCurrency } from "./utils/formatCurrency";
 
 export async function onboardUser(prevState: any, formData: FormData) {
     const session = await requireUser();
@@ -65,31 +67,32 @@ export async function onboardUser(prevState: any, formData: FormData) {
       },
     });
   
-    // const sender = {
-    //   email: "hello@demomailtrap.com",
-    //   name: "Jan Marshal",
-    // };
+    const sender = {
+      email: "hello@demomailtrap.com",
+      name: "Mailtrap Test",
+    };
   
-    // emailClient.send({
-    //   from: sender,
-    //   to: [{ email: "jan@alenix.de" }],
-    //   template_uuid: "3c01e4ee-a9ed-4cb6-bbf7-e57c2ced6c94",
-    //   template_variables: {
-    //     clientName: submission.value.clientName,
-    //     invoiceNumber: submission.value.invoiceNumber,
-    //     invoiceDueDate: new Intl.DateTimeFormat("en-US", {
-    //       dateStyle: "long",
-    //     }).format(new Date(submission.value.date)),
-    //     invoiceAmount: formatCurrency({
-    //       amount: submission.value.total,
-    //       currency: submission.value.currency as any,
-    //     }),
-    //     invoiceLink:
-    //       process.env.NODE_ENV !== "production"
-    //         ? `http://localhost:3000/api/invoice/${data.id}`
-    //         : `https://invoice-marshal.vercel.app/api/invoice/${data.id}`,
-    //   },
-    // });
+    emailClient.send({
+      from: sender,
+      to: [{ email: "ravinduachintha@gmail.com" }],
+      template_uuid: "1bfeca4c-559f-412f-a13a-b18e901c72cf",
+      template_variables: {
+        clientName: submission.value.clientName,
+        invoiceNumber: submission.value.invoiceNumber,
+        invoiceDueDate: new Intl.DateTimeFormat("en-US", {
+          dateStyle: "long",
+        }).format(new Date(submission.value.date)),
+        invoiceAmount: formatCurrency({
+          amount: submission.value.total,
+          currency: submission.value.currency as any,
+        }),
+        invoiceLink:
+          // process.env.NODE_ENV !== "production"
+          //   ? `http://localhost:3000/api/invoice/${data.id}`
+          //   : `https://invoice-marshal.vercel.app/api/invoice/${data.id}`
+          "Test_Invoice_Link",
+      },
+    });
   
     return redirect("/dashboard/invoices");
   }
