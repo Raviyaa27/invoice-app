@@ -51,10 +51,13 @@ export default async function DashboardLayout({
           <div className="flex flex-col max-h-screen h-full gap-2">
             <div className="h-14 flex items-center border-b px-4 lg:h-[60px] lg:px-6">
               <Link href="/" className="flex items-center gap-2">
-                <Image src={Logo} alt="Logo" className="size-7" />
-                <p className="text-2xl font-bold">
-                  SMART<span className="text-blue-600">POS</span>
-                </p>
+                {/* <Image src={Logo} alt="Logo" className="size-7" /> */}
+                {/* <p className="text-2xl font-bold">
+                  <span className="text-black text-2xl">GRAPZIAN</span>
+                </p> */}
+                <Image src={Logo} width={100} height={100} alt='logo'
+                className='w-[150px] md:w-[200px]'
+            />
               </Link>
             </div>
             <div className="flex-1">
