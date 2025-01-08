@@ -49,7 +49,7 @@ export default async function DeleteInvoiceRoute({
         </CardHeader>
         <CardContent>
             <div className="flex justify-center items-center">
-            <Image src={Warning} alt="Warning" width={200} height={200}/>
+            <Image src={Warning} alt="Warning" width={400} height={400}/>
             </div>
         </CardContent>
         <CardFooter className="flex items-center justify-between">
